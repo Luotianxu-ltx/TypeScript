@@ -1,9 +1,10 @@
 "use strict";
-var Direction;
-(function (Direction) {
-    Direction[Direction["Up"] = 3] = "Up";
-    Direction[Direction["Down"] = 4] = "Down";
-    Direction[Direction["Left"] = 8] = "Left";
-    Direction[Direction["Right"] = 9] = "Right"; // 9
-})(Direction || (Direction = {}));
-const direction = Direction.Down;
+var Enum;
+(function (Enum) {
+    Enum[Enum["A"] = 0] = "A";
+    Enum[Enum["B"] = 1] = "B";
+    Enum["C"] = "C";
+    Enum["D"] = "D";
+    Enum[Enum["E"] = 8] = "E";
+    Enum[Enum["F"] = 9] = "F";
+})(Enum || (Enum = {}));

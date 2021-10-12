@@ -1,8 +1,8 @@
-enum Direction {
-    Up = 3,    // 3
-    Down,      // 4
-    Left = 8,  // 8
-    Right      // 9
+enum Enum {
+  A,
+  B,
+  C = "C",
+  D = "D",
+  E = 8,
+  F,
 }
-
-const direction: Direction = Direction.Down

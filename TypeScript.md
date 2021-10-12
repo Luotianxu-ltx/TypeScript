@@ -44,7 +44,7 @@ const test: undefined = undefined
 const test: null = null
 ```
 
-### 1.5 void
+### 1.5 Void类型
 
 void类型表示某个值不存在，该类型用作函数的返回值类型。若一个函数没有返回值，那么该函数的返回值类型为void类型。
 
@@ -97,3 +97,42 @@ const direction: Direction = Direction.Down
 ```
 
 #### 1.7.2 字符串枚举
+
+字符串枚举成员必须实用字符串字面量或另一个字符串枚举成员来初始化。
+
+```typescript
+enum Direction {
+    Up = "ong",
+    Down = "two",
+    Left = "three",
+    Right = "four"
+}
+
+const direction: Direction = Direction.Down
+```
+
+#### 1.7.3 异构型枚举
+
+一个枚举中同时定义数值型枚举成员和字符串枚举成员，这种枚举成为异构型枚举。
+
+```typescript
+enum Direction {
+    Up = 1,
+    Down = "two",
+    Left = 3,
+    Right = "four"
+}
+```
+
+必须为紧跟在字符串枚举成员之后的数值型枚举成员指定一个初始值。
+
+```typescript
+enum Enum {
+    A,
+    B,
+    C = "C",
+    D = "D",
+    E, // 报错
+    F,
+}
+```
