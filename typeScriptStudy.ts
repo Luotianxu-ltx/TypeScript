@@ -1,8 +1,1 @@
-enum Enum {
-  A,
-  B,
-  C = "C",
-  D = "D",
-  E = 8,
-  F,
-}
+const tuple: [number, ...string[]] = [0, 'h', 'e', 'l', 'l', '0']
