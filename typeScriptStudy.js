@@ -1,2 +1,7 @@
 "use strict";
-const tuple = [0, 'h', 'e', 'l', 'l', '0'];
+function identity(arg) {
+    return arg;
+}
+let res = identity('hello');
+let res1 = identity(2);
+let res2 = identity('hello');
