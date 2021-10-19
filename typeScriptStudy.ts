@@ -1,1 +1,11 @@
-const tuple: [number, ...string[]] = [0, 'h', 'e', 'l', 'l', '0']
+function getLength(v:string | undefined) {
+    if (!idDefined(v)) {
+        return 0
+    }
+
+    return v!.length
+}
+
+function idDefined(value: any) {
+    return value !== undefined && value !== null
+}
