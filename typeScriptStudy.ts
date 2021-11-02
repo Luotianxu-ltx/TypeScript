@@ -1,11 +1,14 @@
-function getLength(v:string | undefined) {
-    if (!idDefined(v)) {
-        return 0
-    }
-
-    return v!.length
+interface A {
+    x: number
+}
+interface B {
+    y: string
 }
 
-function idDefined(value: any) {
-    return value !== undefined && value !== null
+function f(x: A | B) {
+    if('x' in x) {
+        x; // A
+    } else {
+        x; // B
+    }
 }

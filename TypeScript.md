@@ -302,19 +302,36 @@ test<String>('hello',3)
 
 ### 2.2 联合类型
 
+联合类型由一组有序的成员类型构成。联合类型表示一个值的类型可以为若干类型之一。例如：“string|number”表示一个值的类型既可以为string类型也可以为number类型。
+
+```typescript
+const sayHello = (name: string | undefined) => {
+  /* ... */
+};
+sayHello("semlinker");
+sayHello(undefined);
+```
+
 ### 2.3 交叉类型
 
-### 2.4 类型索引
+在 TypeScript 中交叉类型是将多个类型合并为一个类型。通过 & 运算符可以将现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性。
 
-### 2.5 映射对象类型
+```typescript
+type PartialPointX = { x: number; };
+type Point = PartialPointX & { y: number; };
 
-### 2.6 条件类型
+let point: Point = {
+  x: 1,
+  y: 1
+}
+```
 
-### 2.7 类型断言
+
+### 2.4 类型断言
 
 有些时候，开发者比编译器更加清楚某个表达式的类型。所哟我们可以通过类型断言的方式告诉编译器，“相信我，我知道自己在干什么”。
 
-#### 2.7.1 <>类型断言
+#### 2.4.1 <>类型断言
 
 `<T>`类型断言的语法为`<T>expr`。在该语法中T表示断言的目标类型；expr表示一个表达式。`<T>`类型断言尝试将expr表达式的类型转换为T类型。
 
@@ -323,7 +340,7 @@ let str: any = 'hello'
 let strLength = (<String>str).length 
 ```
 
-#### 2.7.3 as T类型断言
+#### 2.4.3 as T类型断言
 
 as T类型断言的语法如下： `expr as T`。as是关键字；T表示类型断言的目标类型；expr表示一个表达式。as T类型断言尝试将expr表达式的类型转换为T类型。
 
@@ -332,7 +349,7 @@ let str: any = 'hello'
 let strLength = (str as String).length 
 ```
 
-#### 2.7.4 类型断言的约束
+#### 2.4.4 类型断言的约束
 
 类型断言不允许在两个类型之间随意做转换而是需要满足一定的前提。
 
@@ -345,7 +362,7 @@ function toBoolean(something: string | number): boolean {
 }
 ```
 
-#### 2.7.5 !类型断言
+#### 2.4.5 !类型断言
 
 非空类型断言运算符"!"是TypeScript特有的类型运算符。非空类型断言能够从某个类型中剔除undefined类型和null类型。它的语法如下：`expr!`。在该语法中，expr表示一个表达式，非空类型断言尝试从expr表达式的类型中剔除undefined和null类型。
 
@@ -382,11 +399,11 @@ console.log(b);
 
 虽然在 TS 代码中，我们使用了非空断言，使得 const b: number = a!; 语句可以通过 TypeScript 类型检查器的检查。但在生成的 ES5 代码中，! 非空断言操作符被移除了，所以在浏览器中执行以上代码，在控制台会输出 undefined。
 
-### 2.8 类型守卫
+### 2.5 类型守卫
 
 类型守卫是一类特殊形式的表达式，具有特定的代码编写模式。编译器能够根据已知的模式从代码中识别出这些类型守卫表达式，然后分析类型守卫表达式的值，从而能够将相关的变量、参数或属性等的类型细化为更加1具体的类型。
 
-#### 2.8.1 typeof类型守卫
+#### 2.5.1 typeof类型守卫
 
 typeof运算符用于获取操作数的数据类型。typeof运算符返回值是一个字符串，该字符串表明了操作数的数据类型。
 操作数的类型|typeof返回值
@@ -413,6 +430,52 @@ function padLeft(value: string, padding: string | number) {
 }
 ```
 
-#### 2.8.2 instanceof类型守卫
+#### 2.5.2 instanceof类型守卫
 
+instanceof运算符能够检测实例对象与构造函数之间的关系。instanceof运算符的左侧为实例对象，右侧为构造函数。若构造函数的protptype属性值存在于实例对象的圆形脸上，则返回true；否则返回false。
 
+```typescript
+function f(x: Date | RegExp) {
+    if (x instanceof Date) {
+        x;
+    } 
+    if (x instanceof RegExp) {
+        x;
+    }
+}
+```
+
+#### 2.5.3 in类型守卫
+
+in运算符是JavaScript中的关系运算符之一，用来判断对象自身或其原型链中是否存在给定的属性，若存在则返回true，否则返回false。in运算符有两个操作数，左操作数为待测试的属性名，右操作数为测试对象。
+
+```typescript
+interface A {
+    x: number
+}
+interface B {
+    y: string
+}
+
+function f(x: A | B) {
+    if('x' in x) {
+        x; // A
+    } else {
+        x; // B
+    }
+}
+```
+
+#### 2.5.4 自定义类型守卫函数
+
+```typescript
+function isNumber(x: any): x is number {
+  return typeof x === "number";
+}
+
+function isString(x: any): x is string {
+  return typeof x === "string";
+}
+```
+
+## 三、函数
